@@ -1,0 +1,43 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "ev3api.h"
+
+#define MAIN_PRIORITY    (TMIN_APP_TPRI + 1)
+#define TRACER_PRIORITY  (TMIN_APP_TPRI + 2)
+
+#ifndef STACK_SIZE
+#define STACK_SIZE      (4096)
+#endif /* STACK_SIZE */
+
+
+
+#ifndef TOPPERS_MACRO_ONLY
+
+enum Section{
+  linetrace_section,
+  sralom_section,
+  garage_section
+};
+/*
+enum Step{
+  step1,
+  step2,
+  step3
+};
+*/
+#define duration_start 40 // スタート待ち周期1000
+#define duration_time 40    // 走行中周期
+
+extern void main_task(intptr_t exinf);
+extern void tracer_task(intptr_t exinf);
+extern void tracer_cyc(intptr_t exinf);
+static void _syslog(int level, char* text);
+static void _log(char* text);
+
+#endif /* TOPPERS_MACRO_ONLY */
+
+#ifdef __cplusplus
+}
+#endif
